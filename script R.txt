@@ -1,0 +1,43 @@
+#import file
+DBEX<-data.frame(read.csv(file="H:/NextU/D3/Examen/DB.csv", header=TRUE, sep=","))
+
+#quita "DB" y crea nueva columna "year" (minusculas)
+DBEX$year <- substr(DBEX$Year,3,6)
+
+
+#crea 2o Dataframe
+DBEX1 <- DBEX[,c(1,3,113,4,43,76,8,11,41)]
+
+#extra transformacion para columna "year"
+DBEX1$year <- sapply(DBEX1$year, paste, collapse="")
+DBEX1$year <- as.numeric(DBEX1$year)
+
+#cambia"no practice" por NA
+DBEX1[ DBEX1 == "no practice" ] <- NA
+
+#limpia datos nulos
+delete.na<- function (DBEX1,n=0){
+DBEX1[rowSums(is.na(DBEX1))<=n,]
+}
+delete.na(DBEX1)
+
+#filtra 2016 en 2o dataframe
+DBEX1<-filter(DBEX1,year==2016)
+
+#crea columna con suma starting business
+DBEX1$sum.starting.business <- rowSums(DBEX1[,c(7,8)])
+
+#crea columna con promedio starting business
+DBEX1$avg.starting.business <- rowSums(DBEX1[,c(7,8)])/2
+
+#renombra columnas
+colnames(DBEX1)<-(c("Country","Rank","year","Overall","PropertyValue","TaxProfit","startBusinessMen","startBusinessWomen","RegisteringProcedures","sumStartBusiness","avgStartBusiness"))
+
+#envía a archivo csv con datos 2016 y columnas filtradas
+write.csv(DBEX1, "H:/NextU/D3/Examen/MyData.csv")
+
+
+#Clasificación de datos
+Nominal: Country 
+Ordinal: year 
+Radio o Intervalo: Overall,PropertyValue,TaxProfit,startBusinessMen,startBusinessWomen,RegisteringProcedures,sumStartBusiness,avgStartBusiness

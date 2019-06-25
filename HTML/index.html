@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8" />
+  <head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+  </head>
+  <body onload="funcion()">
+    <select id="datos" onchange="updateDataS(this.value)">
+      <option value="">Seleccione una variable..</option>
+      <option value="a"
+        >Overall DTF versus Registering Property - Cost (% of property
+        value)</option
+      >
+      <option value="b"
+        >Overall DTF versus Paying Taxes - Profit tax (% of profit)</option
+      >
+      <option value="c"
+        >Overall DTF versus (Starting a Business - Time – Men (days) + Starting
+        a Business - Time – Women (days))/2</option
+      >
+      <option value="d"
+        >Overall DTF versus Registering Property - Procedures (number)</option
+      >
+    </select>
+    <div id="chart"></div>
+    <script type="text/javascript"></script>
+    <script type="text/javascript" src="js/d3.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>
